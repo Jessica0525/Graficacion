@@ -1,35 +1,51 @@
-```python
-import matplotlib.pyplot as plt
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+  <script>
+    function setup() {
+      createCanvas(800, 800); // Tamaño del lienzo
+      
+      background(0); // Fondo negro
+      
+      noLoop(); // Detener el dibujo automático
+    }
 
-def fractal(x, y, iteraciones):
-    if iteraciones == 0:
-        return 0
-    
-    x_nuevo = x * x - y * y + x
-    y_nuevo = 2 * x * y + y
-    
-    return 1 + fractal(x_nuevo, y_nuevo, iteraciones - 1)
-
-def graficar_fractal(iteraciones):
-    lado = 3
-    puntos = 1000
-    rango = lado / puntos
-    x = []
-    y = []
-    z = []
-
-    for i in range(puntos):
-        for j in range(puntos):
-            valor = fractal(i * rango - lado/2, j * rango - lado/2, iteraciones)
-            x.append(i * rango - lado/2)
-            y.append(j * rango - lado/2)
-            z.append(valor)
-
-    plt.scatter(x, y, c=z, cmap='viridis', s=1)
-    plt.colorbar()
-    plt.show()
-
-# Ejemplo de uso:
-iteraciones = 100
-graficar_fractal(iteraciones)
-```
+    function draw() {
+      const maxIterations = 100; // Número máximo de iteraciones
+      const zoom = 200; // Nivel de zoom para el fractal
+      
+      for (let x = -width/2; x < width/2; x++) {
+        for (let y = -height/2; y < height/2; y++) {
+          let a = x / zoom;
+          let b = y / zoom;
+          
+          let ca = a;
+          let cb = b;
+          
+          let n = 0;
+          while (n < maxIterations) {
+            let aa = a * a - b * b;
+            let bb = 2 * a * b;
+            
+            a = aa + ca;
+            b = bb + cb;
+            
+            if (a + b > 16) {
+              break;
+            }
+            
+            n++;
+          }
+          
+          let color = map(n, 0, maxIterations, 0, 255);
+          stroke(color); // Color basado en el número de iteraciones
+          point(x + width/2, y + height/2); // Dibuja un punto
+        }
+      }
+    }
+  </script>
+</body>
+</html>
