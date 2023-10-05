@@ -1,3 +1,35 @@
-hahhdsa
-jdsfsdjf
-fhdjfj
+```python
+import matplotlib.pyplot as plt
+
+def fractal(x, y, iteraciones):
+    if iteraciones == 0:
+        return 0
+    
+    x_nuevo = x * x - y * y + x
+    y_nuevo = 2 * x * y + y
+    
+    return 1 + fractal(x_nuevo, y_nuevo, iteraciones - 1)
+
+def graficar_fractal(iteraciones):
+    lado = 3
+    puntos = 1000
+    rango = lado / puntos
+    x = []
+    y = []
+    z = []
+
+    for i in range(puntos):
+        for j in range(puntos):
+            valor = fractal(i * rango - lado/2, j * rango - lado/2, iteraciones)
+            x.append(i * rango - lado/2)
+            y.append(j * rango - lado/2)
+            z.append(valor)
+
+    plt.scatter(x, y, c=z, cmap='viridis', s=1)
+    plt.colorbar()
+    plt.show()
+
+# Ejemplo de uso:
+iteraciones = 100
+graficar_fractal(iteraciones)
+```
