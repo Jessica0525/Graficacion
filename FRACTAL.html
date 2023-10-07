@@ -22,3 +22,20 @@
         ctx.moveTo(0, 0);
         ctx.lineTo(0, -len);
         ctx.stroke();
+ ctx.shadowBlur = 10;
+        ctx.shadowColor = "rgba(50,18,30,0.8)";
+
+        if(len < 10) {
+            ctx.restore();
+            return;
+        }
+
+        draw(0, -len, len*0.7, angle-14, branchWidth*0.7);
+        draw(0, -len, len*0.7, angle+14, branchWidth*0.7);
+
+        ctx.restore();
+    }
+    draw(400, 500, 80, 0, 5)       
+    </script>
+</body>
+</html>
