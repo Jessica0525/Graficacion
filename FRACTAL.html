@@ -22,10 +22,10 @@
         ctx.moveTo(0, 0);
         ctx.lineTo(0, -len);
         ctx.stroke();
- ctx.shadowBlur = 15;
+ ctx.shadowBlur = 25;
         ctx.shadowColor = "rgba(80,100,20,0.5)";
 
-        if(len < 15) {
+        if(len < 25) {
             ctx.restore();
             return;
         }
